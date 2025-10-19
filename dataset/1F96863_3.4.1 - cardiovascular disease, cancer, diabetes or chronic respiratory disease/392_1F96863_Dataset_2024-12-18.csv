@@ -1,0 +1,22 @@
+IND_UUID,IND_NAME,DIM_GEO_CODE_TYPE,DIM_GEO_CODE_M49,GEO_NAME_SHORT,DIM_TIME_TYPE,DIM_TIME,Sex,RATE_PER_100_N,RATE_PER_100_NL,RATE_PER_100_NU
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2001,Female,7.3,6.8,7.7
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2001,Male,14.8,13.9,15.5
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2001,Total,11,10.3,11.6
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2002,Female,7.1,6.6,7.5
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2002,Male,14.4,13.4,15
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2002,Total,10.7,10,11.2
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2003,Female,6.9,6.4,7.3
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2003,Male,14.2,13.3,14.8
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2003,Total,10.5,9.8,11
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2004,Female,6.9,6.4,7.3
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2004,Male,14,13.1,14.5
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2004,Total,10.4,9.7,10.9
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2005,Female,6.9,6.3,7.2
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2005,Male,13.8,12.9,14.4
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2005,Total,10.3,9.7,10.8
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2000,Female,7.5,7,7.9
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2000,Male,15.3,14.4,16
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2000,Total,11.3,10.6,11.9
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2013,Female,6.1,5.6,6.4
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2013,Male,12.2,11.3,12.5
+1F96863,Non-communicable diseases deaths (age 30 to 70),COUNTRY,392,Japan,YEAR,2013,Total,9.2,8.5,9.5

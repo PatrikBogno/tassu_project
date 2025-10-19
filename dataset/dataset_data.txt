@@ -1,0 +1,29 @@
+1F96863_3.4.1 - nds deaths full per capita m/f/t
+WHO Mortality Database - nds deaths specific per capita m/f/t
+
+C288D13_3.3.2 - tuberculosis t
+
+5C8435F_3.C.1 - nurses per capita
+5C8435F_3.C.1 - pharmacists per capita
+217795A_3.C.1 - doctors per capita
+
+12EE54A_6.2.1 - population percentage of safety sanitation
+1548EA3_6.1.1 - population percentage of safely managed drinking water
+
+75DDA77_3.A.1 - tobacco m/f/t
+EE6F72A_3.5.2 - alcohol t
+
+AC597B1_3.1.1 - maternal mortality
+
+B9C6C79_1.a.2 - government spending
+F8E084C_3.B.1 - access to affordable medicine and vaccine
+
+E2FC6D7_3.9.1 - household air pollution
+F810947_11.6.2 - fine particulate matter cities/rural
+
+
+
+
+
+
+

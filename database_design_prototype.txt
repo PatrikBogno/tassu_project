@@ -1,0 +1,52 @@
+table sickness_statistics
+- id				- PK
+- id_year			- FK - data_years.id
+- id_gender			- FK - gender_category.id
+- id_age			- FK - age_category.id
+- id_sickness			- FK - sickness.id
+- id_region 			- FK - region.id (nullable)
+- count_cases			- INTEGER
+- count_deaths			- INTEGER
+
+table activity_statistics
+- id				- PK
+- id_year			- FK - data_years.id
+- id_gender			- FK - gender_category.id
+- id_age			- FK - age_category.id
+- id_activity 			- FK - activity_type.id
+- people_count			- INTEGER
+
+table demographic_distribution
+- id				- PK
+- id_year			- FK - data_years.id
+- id_gender			- FK - gender_category.id
+- id_age			- FK - age_category.id
+- population_count		- INTEGER
+- population_percentage		- FLOAT
+
+table gender_category
+- id				- PK
+- gender_name			- TEXT - "Male", "Female", "Both", "Not Specified"
+
+table age_category
+- id
+- age_group_number		- INTEGER - 10, 20, 30, 40, 50, 60, 70, 80, 90, 200
+- age_group_label 		- TEXT - "0-10", "11-20", "21-30", 
+					 "30-40", "41-50", "51-60",
+					 "60-70", "71-80", "81-90", "91+"
+
+table data_years
+- id 				- PK
+- year_value			- INTEGER - 2010, 2011, 2012, ...
+ 
+table sickness
+- id				- PK
+- name				- TEXT
+- id_parent_sickness		- FK - sickness.id (nullable)
+
+table region
+- id				- PK
+- region_name			- TEXT
+
+
+

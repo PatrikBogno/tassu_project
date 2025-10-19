@@ -1,0 +1,24 @@
+IND_UUID,IND_NAME,DIM_GEO_CODE_TYPE,DIM_GEO_CODE_M49,GEO_NAME_SHORT,DIM_TIME_TYPE,DIM_TIME,Degree of urbanization,RATE_N,RATE_NL,RATE_NU
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2014,Cities,14.10501,13.24791,14.81628
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2019,Cities,11.32238,10.67359,11.9273
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2010,Cities,15.01486,14.22188,15.85783
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2012,Cities,13.02786,12.40672,13.76987
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2015,Cities,13.39873,12.6945,14.09668
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2013,Cities,14.1684,13.46859,14.94425
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2011,Cities,14.65254,13.83205,15.6162
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2017,Cities,12.47246,11.70978,13.17414
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2018,Cities,11.38231,10.69619,12.04168
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2016,Cities,13.16563,12.41142,13.8777
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2014,Rural,12.00216,10.67125,13.46544
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2010,Rural,12.64336,11.19234,14.07785
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2012,Rural,11.04395,9.85258,12.34534
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2015,Rural,11.41933,10.10241,12.7076
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2013,Rural,11.98234,10.68257,13.36589
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2011,Rural,12.40841,10.99891,14.06689
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2017,Rural,10.67775,9.27929,11.91974
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2018,Rural,9.79084,8.69299,10.98131
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2016,Rural,11.24869,9.93384,12.52204
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2019,Rural,9.79668,8.62583,10.95145
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2014,Total,13.41395,12.44729,14.2896
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2010,Total,14.2207,13.23388,15.24065
+F810947,Mean particulates (PM2.5) in urban areas,COUNTRY,392,Japan,YEAR,2012,Total,12.37181,11.62613,13.24976
