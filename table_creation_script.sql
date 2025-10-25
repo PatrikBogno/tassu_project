@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS sickness_statistics (
 CREATE TABLE IF NOT EXISTS activity_statistics (
     id SERIAL NOT NULL PRIMARY KEY,
     id_demographic INT REFERENCES demographic_distribution(id),
+    activity VARCHAR(100),
     id_activity_type INT REFERENCES activity_type(id),
     population_count INT,
     measure_value FLOAT
