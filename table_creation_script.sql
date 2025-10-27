@@ -66,7 +66,7 @@ $$ LANGUAGE plpgsql;
 DROP TRIGGER IF EXISTS trg_update_demographic_percentage ON demographic_distribution;
 
 CREATE TRIGGER trg_update_demographic_percentage
-AFTER INSERT OR UPDATE ON demographic_distribution
+BEFORE INSERT OR UPDATE ON demographic_distribution
 FOR EACH ROW
 EXECUTE FUNCTION update_demographic_percentage();
 

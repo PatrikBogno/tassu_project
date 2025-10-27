@@ -1,14 +1,9 @@
 INSERT INTO gender_category (gender_label)
-SELECT label
-FROM (VALUES
+VALUES
     ('Male'),
     ('Female'),
     ('Both'),
-    ('Not Defined')
-) AS v(label)
-WHERE NOT EXISTS (
-    SELECT 1 FROM gender_category g WHERE g.gender_label = v.label
-);
+    ('Not Defined');
 
 INSERT INTO age_category (age_upper_bound, age_group_label)
 SELECT upper_bound, label
@@ -50,15 +45,8 @@ WHERE NOT EXISTS (
     SELECT 1 FROM data_years d WHERE d.year_value = v.year_value
 );
 
-INSERT INTO activity_type (activity_type)
-SELECT activity_type
-FROM (VALUES
-    ("Healthy"),
-    ("Unhealthy")
-) AS v(activity_type)
-WHERE NOT EXISTS (
-    SELECT 1 FROM activity_type a WHERE a.activity_type = v.year_value
-);
+
+
 
 INSERT INTO total_population (id_year, population_total)
 SELECT d.id, v.population_total
@@ -109,8 +97,7 @@ JOIN (VALUES
     ('Carcinomas', 'Respiratory system/Thorax'),
     ('Carcinomas', 'Urogenital system'),
     ('Carcinomas', 'Endocrine system'),
-    ('Carcinomas', 'Nervous system'),
-    ('Carcinomas In Situ', 'Carcinoma In Situ (CIS)')
+    ('Carcinomas', 'Nervous system')
 ) AS v(cat, subcat) ON c.sickness_label = v.cat
 WHERE NOT EXISTS (SELECT 1 FROM sickness s WHERE s.sickness_label = v.subcat);
 
@@ -210,11 +197,11 @@ JOIN (VALUES
     ('Urogenital system', 'Malignant neoplasm of the prostate'),
     ('Endocrine system', 'Malignant neoplasm of the thyroid gland'),
     ('Nervous system', 'Malignant neoplasms of the central nervous system'),
-    ('Carcinoma In Situ (CIS)', 'Carcinoma in situ of colon'),
-    ('Carcinoma In Situ (CIS)', 'Carcinoma in situ of cervix uteri'),
-    ('Carcinoma In Situ (CIS)', 'Carcinoma in situ of bladder'),
-    ('Carcinoma In Situ (CIS)', 'Carcinoma in situ of esophagus'),
-    ('Carcinoma In Situ (CIS)', 'Carcinoma in situ of breast'),
-    ('Carcinoma In Situ (CIS)', 'Carcinomas in situ of the lower digestive tract')
+    ('Carcinomas In Situ', 'Carcinoma in situ of colon'),
+    ('Carcinomas In Situ', 'Carcinoma in situ of cervix uteri'),
+    ('Carcinomas In Situ', 'Carcinoma in situ of bladder'),
+    ('Carcinomas In Situ', 'Carcinoma in situ of esophagus'),
+    ('Carcinomas In Situ', 'Carcinoma in situ of breast'),
+    ('Carcinomas In Situ', 'Carcinomas in situ of the lower digestive tract')
 ) AS v(subcat, disease) ON s.sickness_label = v.subcat
 WHERE NOT EXISTS (SELECT 1 FROM sickness d WHERE d.sickness_label = v.disease);
