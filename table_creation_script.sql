@@ -86,3 +86,18 @@ CREATE TABLE IF NOT EXISTS activity_statistics (
     population_count INT,
     measure_value FLOAT
 );
+
+CREATE TABLE IF NOT EXISTS healthcare_resources (
+    id SERIAL NOT NULL PRIMARY KEY,
+    id_year INT NOT NULL REFERENCES data_years(id),
+    doctors_per_10000 FLOAT,
+    nurses_per_10000 FLOAT,
+    pharmacists_per_10000 FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS environmental_conditions (
+    id SERIAL PRIMARY KEY,
+    id_year INT NOT NULL REFERENCES data_years(id),
+    safe_water_access_percent FLOAT,
+    sanitation_access_percent FLOAT
+);

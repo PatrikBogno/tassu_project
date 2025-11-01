@@ -1,53 +1,94 @@
 import pandas as pd
 
-def generate_sickness_inserts(excel_path, output_txt_path):
-    df = pd.read_excel(excel_path).fillna("")
+# ---------- USER: set filename ----------
+input_file = "./dataset/kategorizacia2.xlsx"   # change to your file
+sheet_name = 0              # or specify sheet name
+output_sql = "sickness_inserts.sql"
+# ---------------------------------------
 
-    categories = {}
-    subcategories = {}
-    diseases = []
+# Choose output mode:
+# If True -> include pulled own_id in the INSERT (INSERT INTO sickness (id, sickness_label, id_parent_sickness) ...)
+# This guarantees that id_parent_sickness refers to the correct pulled ids.
+# If False -> do NOT include id in the INSERT (let SERIAL assign it). WARNING: then id_parent_sickness will
+# contain pulled ids which will most likely NOT match the database-assigned ids => referential integrity break.
+use_explicit_id = True
 
-    for _, row in df.iterrows():
-        cat = row["Category"].strip()
-        subcat = row["Subcategory"].strip()
-        disease = row["Disease name"].strip()
+# Read Excel
+df = pd.read_excel(input_file, sheet_name=sheet_name, header=0)
 
-        if cat not in categories:
-            categories[cat] = None
+if df.shape[1] < 3:
+    raise ValueError("Input must have at least 3 columns")
 
-        if subcat and (cat, subcat) not in subcategories:
-            subcategories[(cat, subcat)] = None
+col1, col2, col3 = df.columns[0], df.columns[1], df.columns[2]
 
-        if disease:
-            diseases.append((cat, subcat, disease))
+# Track assigned IDs and the parent (closest) ID recorded at first occurrence
+value_to_id = {}
+value_first_parent = {}   # maps value -> parent id (or None) recorded at first encounter
+next_id = 1
 
-    sql_lines = []
+# Process rows in same order as you used before: col2, col3, col1
+for _, row in df.iterrows():
+    previous_ids = []
+    for col in [col2, col3, col1]:
+        val = str(row[col])
+        # compute closest_id for this occurrence: last previous id in this row, if any
+        closest_id = previous_ids[-1] if previous_ids else None
 
-    sql_lines.append("-- 1. Insert all Categories")
-    sql_lines.append("INSERT INTO sickness (sickness_label)\nSELECT label FROM (VALUES")
-    sql_lines += [f"    ('{cat}')" + ("," if i < len(categories)-1 else "") for i, cat in enumerate(categories.keys())]
-    sql_lines.append(") AS v(label)\nWHERE NOT EXISTS (SELECT 1 FROM sickness s WHERE s.sickness_label = v.label);\n")
+        if val not in value_to_id:
+            # record own id and the closest parent at first appearance
+            own_id = next_id
+            value_to_id[val] = own_id
+            value_first_parent[val] = closest_id  # may be None
+            next_id += 1
+        else:
+            # already present: we do not update parent (we only take the first-seen parent)
+            own_id = value_to_id[val]
 
-    sql_lines.append("-- 2. Insert all Subcategories with link to Categories")
-    sql_lines.append("INSERT INTO sickness (sickness_label, id_parent_sickness)\nSELECT v.subcat, c.id\nFROM sickness c\nJOIN (VALUES")
-    sql_lines += [
-        f"    ('{cat}', '{subcat}')" + ("," if i < len(subcategories)-1 else "")
-        for i, (cat, subcat) in enumerate(subcategories.keys())
-    ]
-    sql_lines.append(") AS v(cat, subcat) ON c.sickness_label = v.cat\nWHERE NOT EXISTS (SELECT 1 FROM sickness s WHERE s.sickness_label = v.subcat);\n")
+        # add this value's id to previous_ids for the rest of the row
+        previous_ids.append(own_id)
 
-    sql_lines.append("-- 3. Insert all Diseases with link to Subcategories")
-    sql_lines.append("INSERT INTO sickness (sickness_label, id_parent_sickness)\nSELECT v.disease, s.id\nFROM sickness s\nJOIN (VALUES")
-    sql_lines += [
-        f"    ('{subcat}', '{disease}')" + ("," if i < len(diseases)-1 else "")
-        for i, (cat, subcat, disease) in enumerate(diseases)
-    ]
-    sql_lines.append(") AS v(subcat, disease) ON s.sickness_label = v.subcat\nWHERE NOT EXISTS (SELECT 1 FROM sickness d WHERE d.sickness_label = v.disease);\n")
+# Now produce SQL INSERTs for unique items only.
+# We'll output ordered by own_id ascending (so parents appear before children if possible).
+# helper to escape single quotes in SQL literals
+def sql_escape(s: str) -> str:
+    return s.replace("'", "''")
 
-    with open(output_txt_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(sql_lines))
+# Build list of (own_id, value, parent_id_or_None)
+unique_items = []
+for val, oid in value_to_id.items():
+    parent = value_first_parent.get(val)  # None or int
+    unique_items.append((oid, val, parent))
 
+# sort by own_id ascending
+unique_items.sort(key=lambda t: t[0])
 
-generate_sickness_inserts("./dataset/rozdelenie_chorob_translated.xlsx",
-                          "./dataset/sickness_inserts.txt")
+with open(output_sql, "w", encoding="utf-8") as f:
+    # optional header
+    f.write("-- SQL inserts generated by script\n")
+    f.write("-- Table schema expected:\n")
+    f.write("-- CREATE TABLE IF NOT EXISTS sickness (\n")
+    f.write("--     id SERIAL NOT NULL PRIMARY KEY,\n")
+    f.write("--     sickness_label TEXT NOT NULL,\n")
+    f.write("--     id_parent_sickness INT REFERENCES sickness (id)\n")
+    f.write("-- );\n\n")
 
+    if use_explicit_id:
+        f.write("-- Mode: explicit id included to guarantee referential integrity\n")
+        for oid, val, parent in unique_items:
+            label = sql_escape(val)
+            parent_sql = "NULL" if parent is None else str(parent)
+            # include explicit id
+            f.write(
+                f"INSERT INTO sickness (id, sickness_label, id_parent_sickness) VALUES ({oid}, '{label}', {parent_sql});\n"
+            )
+    else:
+        f.write("-- Mode: id omitted (SERIAL will assign id). CAUTION: parent ids will refer to pulled ids\n")
+        for _, val, parent in unique_items:
+            label = sql_escape(val)
+            parent_sql = "NULL" if parent is None else str(parent)
+            f.write(
+                f"INSERT INTO sickness (sickness_label, id_parent_sickness) VALUES ('{label}', {parent_sql});\n"
+            )
+
+print(f"Wrote {len(unique_items)} unique INSERT statements to {output_sql}")
+print("Note: set use_explicit_id = True if you want id_parent_sickness to reliably reference the inserted rows.")
